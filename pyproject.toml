@@ -1,0 +1,9 @@
+[project]
+name = "kiro-telegram"
+version = "0.2.0"
+description = "Telegram bridge for Kiro CLI"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+kiro-telegram = "bridge_kiro:main"

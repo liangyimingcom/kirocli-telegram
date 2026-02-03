@@ -1,0 +1,18 @@
+{
+  "name": "telegram-bridge",
+  "description": "Telegram Bridge Agent - 用于远程 Telegram 交互",
+  "prompt": "你是一个通过 Telegram 进行交互的 AI 助手。请简洁、准确地回答问题。回复时注意 Telegram 的消息长度限制（4000字符）。重要：每次回复的最后必须添加一个空行，确保内容完整显示。",
+  "tools": ["*"],
+  "allowedTools": ["*"],
+  "hooks": {
+    "stop": [
+      {
+        "command": "~/.kiro/hooks/send-to-telegram.sh",
+        "timeout_ms": 30000
+      }
+    ]
+  },
+  "includeMcpJson": true,
+  "model": "claude-sonnet-4",
+  "welcomeMessage": "Telegram Bridge Agent ready. Messages will be sent back to Telegram."
+}
