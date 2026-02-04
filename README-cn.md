@@ -1,10 +1,8 @@
 # kiro-telegram
 
-[English](README.md)
+[English](README.md) | [迁移报告](ClaudeCodetoKiroCLIMigrationAnalysisReport.md)
 
-Telegram bot bridge for Kiro CLI. Send messages from Telegram, get responses back.
-
-> 基于 [claudecode-telegram](https://github.com/hanxiao/claudecode-telegram) 迁移适配
+Kiro CLI 的 Telegram 机器人桥接工具。通过 Telegram 发送消息，获取 Kiro 的响应。
 
 ## 工作原理
 
@@ -65,18 +63,6 @@ flowchart TB
 2. **消息注入**: Bridge Server → tmux send-keys → Kiro CLI
 3. **响应获取**: Kiro CLI Stop Hook → tmux capture-pane → 解析输出
 4. **响应发送**: Stop Hook → Telegram Bot API → Telegram
-
-## 与 Claude Code 版本的区别
-
-| 功能 | Claude Code | Kiro CLI |
-|------|-------------|----------|
-| 启动命令 | `claude --dangerously-skip-permissions` | `kiro-cli chat --trust-all-tools` |
-| 会话恢复 | `--resume {session_id}` | `--resume` / `--resume-picker` |
-| 配置目录 | `~/.claude/` | `~/.kiro/` |
-| tmux 会话名 | `claude` | `kiro` |
-| Hook 配置 | `settings.json` | Agent 配置文件 |
-| 响应获取 | 读取 transcript.jsonl | tmux capture-pane |
-| Ralph Loop | ✅ 支持 | ❌ 不支持 |
 
 ## 前置条件
 
@@ -178,15 +164,6 @@ curl "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook?url=https://Y
 | `/clear` | 清除对话 | 向 Kiro CLI 发送 /clear 命令 |
 | `/stop` | 中断操作 | 发送 Escape 键中断当前操作 |
 | `/resume` | 恢复会话 | 显示两个选项：恢复最近 / 选择会话 |
-
-### 不支持的命令
-
-以下命令在 Kiro CLI 版本中不支持：
-
-| 命令 | 说明 |
-|------|------|
-| `/loop` | Ralph Loop 功能，Kiro CLI 不支持 |
-| `/continue_` | 建议使用 `/resume` 替代 |
 
 ## 环境变量
 
@@ -305,25 +282,6 @@ rm ~/.kiro/telegram_pending
 ### tmux 会话断开
 
 如果 tmux 会话不存在，Bridge Server 会返回 "tmux not found" 错误消息。
-
-## 已知限制
-
-1. **Ralph Loop 不支持**: Kiro CLI 没有类似 Claude Code 的 Ralph Loop 功能
-2. **会话 ID 直接恢复**: 不支持 `--resume {session_id}`，使用 `--resume-picker` 交互式选择
-3. **响应获取方式**: 使用 tmux capture-pane 而非直接读取 transcript 文件
-4. **历史会话列表**: 不读取 `~/.claude/history.jsonl`，使用 Kiro 内置会话管理
-
-## 迁移检查清单
-
-从 Claude Code 版本迁移时，确认以下事项：
-
-- [ ] 停止原 Claude Code Bridge
-- [ ] 安装 Kiro Agent 配置到 `~/.kiro/agents/`
-- [ ] 安装 Hook 脚本到 `~/.kiro/hooks/`
-- [ ] 更新 Hook 脚本中的 Bot Token
-- [ ] 创建新的 tmux 会话 `kiro`
-- [ ] 使用 `--agent telegram-bridge` 启动 Kiro CLI
-- [ ] 更新 Telegram Webhook URL（如果 tunnel URL 变化）
 
 ## License
 

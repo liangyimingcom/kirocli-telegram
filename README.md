@@ -1,10 +1,8 @@
 # kiro-telegram
 
-[中文文档](README-cn.md)
+[中文文档](README-cn.md) | [Migration Report](ClaudeCodetoKiroCLIMigrationAnalysisReport.md)
 
 Telegram bot bridge for Kiro CLI. Send messages from Telegram, get responses back.
-
-> Migrated from [claudecode-telegram](https://github.com/hanxiao/claudecode-telegram)
 
 ## How it Works
 
@@ -167,15 +165,6 @@ curl "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook?url=https://Y
 | `/stop` | Interrupt operation | Sends Escape key to interrupt |
 | `/resume` | Resume session | Shows two options: Resume recent / Pick session |
 
-### Unsupported Commands
-
-The following commands are not supported in Kiro CLI version:
-
-| Command | Note |
-|---------|------|
-| `/loop` | Ralph Loop feature, not supported in Kiro CLI |
-| `/continue_` | Use `/resume` instead |
-
 ## Environment Variables
 
 | Variable | Default | Description |
@@ -268,13 +257,6 @@ rm ~/.kiro/telegram_pending
 | Hook not triggering | Agent not loaded | Confirm using `--agent telegram-bridge` at startup |
 | Response timeout | Pending file expired | Check system time, clean pending file |
 | HTML format error | Markdown conversion failed | Check Hook log, falls back to plain text |
-
-## Known Limitations
-
-1. **Ralph Loop not supported**: Kiro CLI doesn't have Ralph Loop feature like Claude Code
-2. **Session ID direct resume**: `--resume {session_id}` not supported, use `--resume-picker` for interactive selection
-3. **Response capture method**: Uses tmux capture-pane instead of reading transcript file
-4. **Session history list**: Doesn't read `~/.claude/history.jsonl`, uses Kiro's built-in session management
 
 ## License
 
