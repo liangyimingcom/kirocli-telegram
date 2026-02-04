@@ -76,7 +76,14 @@ kiro-cli --version
 
 ## Quick Start
 
-### Option 1: One-Click Start (Recommended)
+### 1. Clone the Project
+
+```bash
+git clone https://github.com/liangyimingcom/kirocli-telegram.git
+cd kirocli-telegram
+```
+
+### 2. One-Click Start (Recommended)
 
 ```bash
 # Set Bot Token
@@ -93,7 +100,7 @@ The startup script will automatically:
 - Create tmux session and start Kiro CLI
 - Start Bridge Server
 
-### Option 2: Manual Setup
+### 3. Manual Setup (Alternative)
 
 #### 1. Create Telegram Bot
 

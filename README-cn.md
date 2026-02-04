@@ -76,7 +76,14 @@ kiro-cli --version
 
 ## 快速开始
 
-### 方式一：一键启动（推荐）
+### 1. 克隆项目
+
+```bash
+git clone https://github.com/liangyimingcom/kirocli-telegram.git
+cd kirocli-telegram
+```
+
+### 2. 一键启动（推荐）
 
 ```bash
 # 设置 Bot Token
@@ -93,7 +100,7 @@ export TELEGRAM_BOT_TOKEN="your_token_from_botfather"
 - 创建 tmux 会话并启动 Kiro CLI
 - 启动 Bridge Server
 
-### 方式二：手动配置
+### 3. 手动配置（可选）
 
 #### 1. 创建 Telegram Bot
 
