@@ -83,7 +83,13 @@ git clone https://github.com/liangyimingcom/kirocli-telegram.git
 cd kirocli-telegram
 ```
 
-### 2. 一键启动（推荐）
+### 2. 创建 Telegram Bot
+
+1. 在 Telegram 中搜索 [@BotFather](https://t.me/BotFather)
+2. 发送 `/newbot` 并按提示操作
+3. 获取 Bot Token（格式如 `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`）
+
+### 3. 一键启动（推荐）
 
 ```bash
 # 设置 Bot Token
@@ -100,13 +106,9 @@ export TELEGRAM_BOT_TOKEN="your_token_from_botfather"
 - 创建 tmux 会话并启动 Kiro CLI
 - 启动 Bridge Server
 
-### 3. 手动配置（可选）
+### 4. 手动配置（可选）
 
-#### 1. 创建 Telegram Bot
-
-在 Telegram 中联系 [@BotFather](https://t.me/BotFather)，创建 bot，获取 token。
-
-#### 2. 安装 Agent 配置
+#### 安装 Agent 配置
 
 ```bash
 # 创建目录
@@ -120,7 +122,7 @@ cp kiro-hooks/send-to-telegram.sh ~/.kiro/hooks/
 chmod +x ~/.kiro/hooks/send-to-telegram.sh
 ```
 
-#### 3. 配置 Bot Token
+#### 配置 Bot Token
 
 编辑 Hook 脚本，设置你的 Bot Token：
 
@@ -135,14 +137,14 @@ nano ~/.kiro/hooks/send-to-telegram.sh
 export TELEGRAM_BOT_TOKEN="your_token"
 ```
 
-#### 4. 启动 tmux + Kiro CLI
+#### 启动 tmux + Kiro CLI
 
 ```bash
 tmux new -s kiro
 kiro-cli chat --trust-all-tools --agent telegram-bridge
 ```
 
-#### 5. 运行 Bridge Server
+#### 运行 Bridge Server
 
 在另一个终端：
 
@@ -151,13 +153,13 @@ export TELEGRAM_BOT_TOKEN="your_token"
 python3 bridge_kiro.py
 ```
 
-#### 6. 暴露到互联网
+#### 暴露到互联网
 
 ```bash
 cloudflared tunnel --url http://localhost:8080
 ```
 
-#### 7. 设置 Telegram Webhook
+#### 设置 Telegram Webhook
 
 ```bash
 curl "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook?url=https://YOUR-TUNNEL-URL.trycloudflare.com"

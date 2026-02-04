@@ -83,7 +83,13 @@ git clone https://github.com/liangyimingcom/kirocli-telegram.git
 cd kirocli-telegram
 ```
 
-### 2. One-Click Start (Recommended)
+### 2. Create a Telegram Bot
+
+1. Search for [@BotFather](https://t.me/BotFather) on Telegram
+2. Send `/newbot` and follow the prompts
+3. Get your Bot Token (looks like `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`)
+
+### 3. One-Click Start (Recommended)
 
 ```bash
 # Set Bot Token
@@ -100,13 +106,9 @@ The startup script will automatically:
 - Create tmux session and start Kiro CLI
 - Start Bridge Server
 
-### 3. Manual Setup (Alternative)
+### 4. Manual Setup (Alternative)
 
-#### 1. Create Telegram Bot
-
-Contact [@BotFather](https://t.me/BotFather) on Telegram, create a bot, get the token.
-
-#### 2. Install Agent Config
+#### Install Agent Config
 
 ```bash
 # Create directories
@@ -120,7 +122,7 @@ cp kiro-hooks/send-to-telegram.sh ~/.kiro/hooks/
 chmod +x ~/.kiro/hooks/send-to-telegram.sh
 ```
 
-#### 3. Configure Bot Token
+#### Configure Bot Token
 
 Edit the Hook script to set your Bot Token:
 
@@ -135,14 +137,14 @@ Or set via environment variable (recommended):
 export TELEGRAM_BOT_TOKEN="your_token"
 ```
 
-#### 4. Start tmux + Kiro CLI
+#### Start tmux + Kiro CLI
 
 ```bash
 tmux new -s kiro
 kiro-cli chat --trust-all-tools --agent telegram-bridge
 ```
 
-#### 5. Run Bridge Server
+#### Run Bridge Server
 
 In another terminal:
 
@@ -151,13 +153,13 @@ export TELEGRAM_BOT_TOKEN="your_token"
 python3 bridge_kiro.py
 ```
 
-#### 6. Expose to Internet
+#### Expose to Internet
 
 ```bash
 cloudflared tunnel --url http://localhost:8080
 ```
 
-#### 7. Set Telegram Webhook
+#### Set Telegram Webhook
 
 ```bash
 curl "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook?url=https://YOUR-TUNNEL-URL.trycloudflare.com"
