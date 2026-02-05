@@ -151,7 +151,7 @@ if [ -z "$SKIP_TUNNEL" ]; then
     
     # 在后台启动 cloudflared，输出到临时文件
     TUNNEL_LOG=$(mktemp)
-    cloudflared tunnel --url http://localhost:$PORT --protocol http2 > "$TUNNEL_LOG" 2>&1 &
+    cloudflared tunnel --url http://localhost:$PORT > "$TUNNEL_LOG" 2>&1 &
     TUNNEL_PID=$!
     
     # 等待 tunnel URL 出现

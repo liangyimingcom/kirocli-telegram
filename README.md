@@ -258,6 +258,27 @@ cat ~/.kiro/telegram_pending
 rm ~/.kiro/telegram_pending
 ```
 
+### Port Conflict
+
+If port 8080 is already in use (e.g., by another Telegram bot like claudecode-telegram), you'll see:
+
+```
+OSError: [Errno 48] Address already in use
+```
+
+Solution: Use a different port via environment variable:
+
+```bash
+PORT=8081 ./start-kiro-bridge.sh
+```
+
+Or check what's using port 8080 and stop it:
+
+```bash
+lsof -i :8080
+kill -9 <PID>
+```
+
 ### Common Issues
 
 | Issue | Cause | Solution |
@@ -266,6 +287,7 @@ rm ~/.kiro/telegram_pending
 | Hook not triggering | Agent not loaded | Confirm using `--agent telegram-bridge` at startup |
 | Response timeout | Pending file expired | Check system time, clean pending file |
 | HTML format error | Markdown conversion failed | Check Hook log, falls back to plain text |
+| Address already in use | Port 8080 occupied | Use `PORT=8081 ./start-kiro-bridge.sh` |
 
 ## License
 

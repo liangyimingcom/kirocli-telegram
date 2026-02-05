@@ -269,6 +269,27 @@ cat ~/.kiro/telegram_pending
 rm ~/.kiro/telegram_pending
 ```
 
+### 端口冲突
+
+如果 8080 端口已被占用（例如本机同时运行 claudecode-telegram），会报错：
+
+```
+OSError: [Errno 48] Address already in use
+```
+
+解决方案：通过环境变量指定其他端口：
+
+```bash
+PORT=8081 ./start-kiro-bridge.sh
+```
+
+或者查看并停止占用 8080 端口的进程：
+
+```bash
+lsof -i :8080
+kill -9 <PID>
+```
+
 ### 常见问题
 
 | 问题 | 原因 | 解决方案 |
@@ -277,6 +298,7 @@ rm ~/.kiro/telegram_pending
 | Hook 不触发 | Agent 未加载 | 确认使用 `--agent telegram-bridge` 启动 |
 | 响应超时 | Pending 文件过期 | 检查系统时间，清理 pending 文件 |
 | HTML 格式错误 | Markdown 转换失败 | 检查 Hook 日志，回退到纯文本 |
+| Address already in use | 端口 8080 被占用 | 使用 `PORT=8081 ./start-kiro-bridge.sh` |
 
 ## 错误处理
 
